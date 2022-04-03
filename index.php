@@ -3,18 +3,18 @@
 
 class rgb
 {
-    private $red;
-    private $green;
-    private $blue;
+    private int $red;
+    private int $green;
+    private int $blue;
 
-     public function __construct($red, $green, $blue)
+     public function __construct(int $red, int $green, int $blue)
   {
       $this->setRed($red);
       $this->setGreen($green);
       $this->setBlue($blue);
   }
 
-    private function setRed($red){
+    private function setRed(int $red){
        if($red < 0 || $red > 255){
            throw new Exception(wrong);
         }
@@ -22,14 +22,14 @@ class rgb
          $this->red = $red;
   }
 
-    private function setGreen($green){
+    private function setGreen(int $green){
         if($green < 0 || $green > 255) {
             throw new Exception(wrong);
         }
             $this->green = $green;
     }
 
-    private function setBlue($blue){
+    private function setBlue(int $blue){
          if($blue < 0 || $blue > 255) {
             throw new Exception(wrong);
         }
@@ -53,10 +53,13 @@ class rgb
 
     // метод сравнения обьектов цветов
 
-    public function equals(rgb $rgb)
+    public function equals(rgb $rgb): int
     {
-        return $this->green === $rgb->getRed() && $this->blue === $rgb->getGreen();
+        //return $this->green === $rgb->getRed() && $this->blue === $rgb->getGreen() && $this->red === $rgb->getBlue();
+        return  $this == $rgb;
+
     }
+
 
     // генератор случайного цвета
 
@@ -68,7 +71,10 @@ class rgb
     public function mix(rgb $rgb)
     {
         //return $rgb->green + $rgb->getRed() / 2;
-        return new rgb ((($rgb->getGreen()) + $rgb->getRed() / 2), (($rgb->getGreen()) + $rgb->getRed() / 2), (($rgb->getGreen()) + $rgb->getRed() / 2)) ;
+        return new rgb (
+            intval((($rgb->getGreen ()) + $rgb->getRed() / 2)),
+            intval((($rgb->getGreen()) + $rgb->getRed() / 2)),
+            intval((($rgb->getGreen()) + $rgb->getRed() / 2)));
     }
 }
 
@@ -90,7 +96,9 @@ echo $mixedColor->getBlue() .PHP_EOL;
 
 if (!$rgb->equals($mixedColor)) {
     echo 'Цвета не равны';
-    }
+    }else{
+    echo 'все окей';
+}
 
 //var_dump($rgb);
 //var_dump($rgb->equals($rgb2));
